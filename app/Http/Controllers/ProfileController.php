@@ -6,7 +6,9 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Validator as ValidationValidator;
 
 class ProfileController extends Controller
 {
@@ -35,6 +37,39 @@ class ProfileController extends Controller
         User::where('id',Auth::user()->id)->update($userData);
         return back()->with(['updateSuccess' => 'Admin account updated']);
     }
+
+        //change password get
+        public function directChangePassword(){
+            return view('admin.profile.changePassword');
+        }
+
+        //change password post
+        public function changePassword(Request $request){
+            // dd($request->all());
+            $validator =$this->changePasswordValidationCheck($request);
+
+            if($validator->fails()){
+                return back()->withErrors($validator)->withInput();
+            }
+            //database out same old with
+                $dbData =User::where('id',Auth::user()->id)->first();
+                $hashUserPassword =Hash::make($request->newPassword);
+            
+                //under array db update 
+                $updateData =[
+                    'password' =>$hashUserPassword,
+                    'updated_at'=>Carbon::now()
+                ];
+
+                    if(Hash::check($request->oldPassword,$dbData->password)){
+                        User::where('id',Auth::user()->id)->update($updateData);
+                        return redirect()->route('dashboard');
+                    }else{
+                        return back()->with(['fail'=>'oldPassword does not match!']);
+                    }
+        }
+
+
     //get user info function 
     private function getUserInfo($request){
         return[
@@ -46,7 +81,8 @@ class ProfileController extends Controller
             'updated_at' =>Carbon::now(),
         ];
     }
-    //validation check
+    
+    //validation check user
     private function userValidationCheck($request){
          return Validator::make($request->all(),[
             'adminName' =>'required',
@@ -55,5 +91,16 @@ class ProfileController extends Controller
             'adminName.required' =>'require admin feild',
         ]);
     }
-
+        //validation check change password
+        private function changePasswordValidationCheck($request){
+            $validationRules = [
+                'oldPassword'=>'required',
+                'newPassword'=>'required|min:6|max:15',
+                'confirmPassword'=>'required|same:newPassword|min:6|max:15',
+            ];
+            $validationMessages = [
+                'confirmPassword.same'=> 'New password  and confirm password must be same'
+            ];
+            return Validator::make($request->all(),$validationRules,$validationMessages);
+        }
 }
