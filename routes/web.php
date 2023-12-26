@@ -38,6 +38,8 @@ Route::middleware([
     Route::post('admin/changePassword',[ProfileController::class, 'changePassword'])->name('admin#changePassword');
     //admin list
     Route::get('admin/list',[ListController::class, 'index'])->name('admin#list');
+    Route::get('admin/list/{id}',[ListController::class, 'accountDelete'])->name('admin#listDelete');
+    Route::post('admin/list',[ListController::class, 'adminListSearch'])->name('admin#listSearch');
     //post
     Route::get('post',[PostController::class, 'index'])->name('admin#post');
     //tr post

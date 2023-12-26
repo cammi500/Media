@@ -29,7 +29,7 @@
     <!-- Brand Logo -->
     <a href="#" class="brand-link">
 
-      <span class="brand-text font-weight-light">Pizza Order System </span>
+      <span class="brand-text font-weight-light">My Media Project</span>
     </a>
 
     <!-- Sidebar -->
