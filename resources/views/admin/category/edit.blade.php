@@ -3,24 +3,29 @@
 <div class="col-4">
     <div class="card">
         <div class="card-body">
-            <form method="post" action="{{route('admin#categoryCreate')}}"> 
+            <form method="post" action="{{route('category#update',$categoryUpdate['category_id'])}}"> 
                 @csrf
                 <div class="form-group">
                     <label>Category name</label>
-                    <input type="text"name="categoryName" class="form-control" placeholder="Enter category name">
+                    <input type="text" name="categoryName" value="{{old('categoryName'),$categoryUpdate['title']}}" class="form-control" placeholder="Enter category name">
                     @error('categoryName')
                     <div class="text-danger">{{$message}}</div>
                   @enderror
                 </div>
                 <div class="form-group">
                     <label>Discription</label>
-                    <textarea type="text" name="categoryDescription" cols="10" rows="10" class="form-control" placeholder="Enter discription"></textarea>
+                    <textarea type="text" name="categoryDescription"   cols="10" rows="10" class="form-control" placeholder="Enter discription">{{old('categoryDescription'),$categoryUpdate['description']}}</textarea>
                     @error('categoryDescription')
                     <div class="text-danger">{{$message}}</div>
                   @enderror
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
+                <button type="submit" class="btn btn-primary">Update</button>
+                <a href="{{route('admin#category')}}">
+                  <button type="button" class="btn btn-success">Create</button>
+              </a>
+              </form>
+               
+            
         </div>
     </div>
 </div>
@@ -58,8 +63,6 @@
               <th>Category ID</th>
               <th>Customer Name</th>
               <th>Description</th>
-             
-              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -69,9 +72,7 @@
                 <td>{{$item['title']}}</td>
                 <td>{{$item['description']}}</td>
                 <td>
-                 <a href="{{route('category#edit',$item['category_id'])}}">
                   <button class="btn btn-sm bg-dark text-white"><i class="fas fa-edit"></i></button>
-                </a>
                     <a href="{{route('category#delete', $item['category_id'])}}" >
                       <button class="btn btn-sm bg-danger text-white"><i class="fas fa-trash-alt"></i></button>
                     </a>
