@@ -46,4 +46,7 @@ Route::middleware([
     Route::get('trend_post',[TrendPostController::class, 'index'])->name('admin#trendPost');
     //category
     Route::get('category',[CategoryController::class, 'index'])->name('admin#category');
+    Route::post('category',[CategoryController::class, 'createCategory'])->name('admin#categoryCreate');
+    Route::get('category/{id}',[CategoryController::class, 'deleteCategory'])->name('category#delete');
+    Route::post('category/search',[CategoryController::class,'searchCategory'])->name('category#search');
 });
