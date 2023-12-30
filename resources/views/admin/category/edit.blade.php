@@ -7,14 +7,15 @@
                 @csrf
                 <div class="form-group">
                     <label>Category name</label>
-                    <input type="text" name="categoryName" value="{{old('categoryName'),$categoryUpdate['title']}}" class="form-control" placeholder="Enter category name">
+                    {{-- $user->name --}}
+                    <input type="text" name="categoryName" value="{{old('categoryName'),$categoryUpdate->title}}" class="form-control" placeholder="Enter category name">
                     @error('categoryName')
                     <div class="text-danger">{{$message}}</div>
                   @enderror
                 </div>
                 <div class="form-group">
                     <label>Discription</label>
-                    <textarea type="text" name="categoryDescription"   cols="10" rows="10" class="form-control" placeholder="Enter discription">{{old('categoryDescription'),$categoryUpdate['description']}}</textarea>
+                    <textarea type="text" name="categoryDescription"   cols="10" rows="10" class="form-control" placeholder="Enter discription">{{old('categoryDescription'),$categoryUpdate->description}}</textarea>
                     @error('categoryDescription')
                     <div class="text-danger">{{$message}}</div>
                   @enderror

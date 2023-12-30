@@ -3,23 +3,49 @@
 <div class="col-4">
     <div class="card">
         <div class="card-body">
-            <form method="post" action="{{route('admin#categoryCreate')}}"> 
+            <form method="post" action="{{route('post#Create')}}" enctype="multipart/form-data"> 
                 @csrf
                 <div class="form-group">
-                    <label>Category name</label>
-                    <input type="text"name="categoryName" class="form-control" placeholder="Enter category name">
-                    @error('categoryName')
+                    <label>Post name</label>
+                    <input type="text" name="postName" value="{{old('postName')}}" class="form-control" placeholder="Enter post name">
+                    @error('postName')
                     <div class="text-danger">{{$message}}</div>
                   @enderror
                 </div>
                 <div class="form-group">
+                  <label>Post Author</label>
+                  <input type="text"name="postAuthor" value="{{old('postAuthor')}}" class="form-control" placeholder="Enter post author">{{old('postName')}}
+                  @error('postAuthor')
+                  <div class="text-danger">{{$message}}</div>
+                @enderror
+              </div>
+                <div class="form-group">
                     <label>Discription</label>
-                    <textarea type="text" name="categoryDescription" cols="10" rows="10" class="form-control" placeholder="Enter discription"></textarea>
-                    @error('categoryDescription')
+                    <textarea type="text" name="postDescription" cols="10" rows="10" class="form-control" placeholder="Enter discription"></textarea>
+                    @error('postDescription')
                     <div class="text-danger">{{$message}}</div>
                   @enderror
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <div class="form-group">
+                  <label>Image</label>
+                  <input type="file" name="postImage"  class="form-control" >
+                  @error('postImage')
+                  <div class="text-danger">{{$message}}</div>
+                @enderror
+              </div>
+              <div class="form-group">
+                <label>Category Name</label>
+               <select name="postCategory" id="" class="form-control">
+                <option value="">Choose Category..</option>
+               @foreach ($category as $c)
+                 <option value="{{$c['category_id']}}">{{$c['title']}}</option>"
+               @endforeach
+               </select>
+                @error('postDescription')
+                <div class="text-danger">{{$message}}</div>
+              @enderror
+            </div>
+                <button type="submit" class="btn btn-primary">Create</button>
             </form>
         </div>
     </div>
@@ -35,12 +61,12 @@
       @endif
     <div class="card">
       <div class="card-header">
-        <form  method="post" action="{{route('category#search')}}">
-        <h3 class="card-title">Category Table</h3>
-        @csrf
+        <h3 class="card-title">Post Table</h3>
         <div class="card-tools">
+          <form  action="">
+            @csrf
           <div class="input-group input-group-sm" style="width: 150px;">
-            <input type="text" name="categorySearchKey" class="form-control float-right" placeholder="Search">
+            <input type="text" name="postSearchKey" class="form-control float-right" placeholder="Search">
             <div class="input-group-append">
               <button type="submit" class="btn btn-default">
                 <i class="fas fa-search"></i>
@@ -55,24 +81,34 @@
         <table class="table table-hover text-nowrap text-center">
           <thead>
             <tr>
-              <th>Category ID</th>
-              <th>Customer Name</th>
+              <th>Post ID</th>
+              <th>Name</th>
+              <th>Author</th>
               <th>Description</th>
-             
+              <th>Image</th>
               <th></th>
+            
             </tr>
           </thead>
           <tbody>
-            @foreach ($category as $item)
+            @foreach ($post as $item)
             <tr>
-                <td>{{$item['category_id']}}</td>
+                <td>{{$item['post_id']}}</td>
                 <td>{{$item['title']}}</td>
+                <td>{{$item['author']}}</</td>
                 <td>{{$item['description']}}</td>
+                <td><img class="rounded" width="100px" height="100px" 
+                  @if ($item['image'] == null)
+                  src="{{asset('defaultImage/Screenshot (176).png')}}"
+                  @else
+                  src="{{asset('postImage/'.$item['image'])}}"
+                  @endif
+                  ></td>
                 <td>
-                 <a href="{{route('category#edit',$item['category_id'])}}">
+                 <a href="">
                   <button class="btn btn-sm bg-dark text-white"><i class="fas fa-edit"></i></button>
                 </a>
-                    <a href="{{route('category#delete', $item['category_id'])}}" >
+                    <a href="" >
                       <button class="btn btn-sm bg-danger text-white"><i class="fas fa-trash-alt"></i></button>
                     </a>
                 </td>

@@ -42,6 +42,7 @@ Route::middleware([
     Route::post('admin/list',[ListController::class, 'adminListSearch'])->name('admin#listSearch');
     //post
     Route::get('post',[PostController::class, 'index'])->name('admin#post');
+    Route::post('post',[PostController::class, 'postCreate'])->name('post#Create');
     //tr post
     Route::get('trend_post',[TrendPostController::class, 'index'])->name('admin#trendPost');
     //category
