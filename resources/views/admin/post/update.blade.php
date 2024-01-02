@@ -3,32 +3,41 @@
 <div class="col-4">
     <div class="card">
         <div class="card-body">
-            <form method="post" action="{{route('post#Create')}}" enctype="multipart/form-data"> 
+            <form method="post" action="{{route('post#Update',$postDetail['post_id'])}}" enctype="multipart/form-data"> 
                 @csrf
                 <div class="form-group">
                     <label>Post name</label>
-                    <input type="text" name="postName" value="{{old('postName')}}" class="form-control" placeholder="Enter post name">
+                    <input type="text" name="postName" value="{{old('postName',$postDetail['title'])}}" class="form-control" placeholder="Enter post name">
                     @error('postName')
                     <div class="text-danger">{{$message}}</div>
                   @enderror
                 </div>
                 <div class="form-group">
                   <label>Post Author</label>
-                  <input type="text"name="postAuthor" value="{{old('postAuthor')}}" class="form-control" placeholder="Enter post author">{{old('postName')}}
+                  <input type="text" name="postAuthor" value="{{old('postAuthor',$postDetail['author'])}}" class="form-control" placeholder="Enter post author">
                   @error('postAuthor')
                   <div class="text-danger">{{$message}}</div>
                 @enderror
               </div>
                 <div class="form-group">
                     <label>Discription</label>
-                    <textarea type="text" name="postDescription" cols="10" rows="10" class="form-control" placeholder="Enter discription"></textarea>
+                    <textarea type="text" name="postDescription" cols="10" rows="10" class="form-control" placeholder="Enter discription"> {{old('postDescription',$postDetail['description'])}}
+                    </textarea>
                     @error('postDescription')
                     <div class="text-danger">{{$message}}</div>
                   @enderror
                 </div>
                 <div class="form-group">
                   <label>Image</label>
-                  <input type="file" value="{{old('postImage')}}" name="postImage"  class="form-control" >
+                 <br>
+                     <img width="200" 
+                     @if ($postDetail['image'] == null ) src="{{asset('defaultImage/Screenshot (176).png')}}"
+                     @else
+                     src="{{asset('postImage/'.$postDetail['image'])}}"
+                     @endif>
+
+                     <input type="file" name="postImage" class="form-control">
+                     {{-- height="100" src="{{asset('postImage/'.$postDetail['image']) }}"> --}}
                   @error('postImage')
                   <div class="text-danger">{{$message}}</div>
                 @enderror
@@ -38,14 +47,16 @@
                <select name="postCategory" id="" class="form-control">
                 <option value="">Choose Category..</option>
                @foreach ($category as $c)
-                 <option value="{{$c['category_id']}}">{{$c['title']}}</option>"
-               @endforeach
+                 <option value="{{$c['category_id']}}"
+                  @if ($c['category_id'] == $postDetail['category_id'] ) selected @endif>
+                  {{$c['title']}}</option>"
+               @endforeach 
                </select>
                 @error('postDescription')
                 <div class="text-danger">{{$message}}</div>
               @enderror
             </div>
-                <button type="submit" class="btn btn-primary">Create</button>
+                <button type="submit" class="btn btn-primary">Update</button>
             </form>
         </div>
     </div>
@@ -86,8 +97,6 @@
               <th>Author</th>
               <th>Description</th>
               <th>Image</th>
-              <th></th>
-            
             </tr>
           </thead>
           <tbody>
@@ -108,19 +117,19 @@
                  <a href="{{route('post#Edit',$item['post_id'])}}">
                   <button class="btn btn-sm bg-dark text-white"><i class="fas fa-edit"></i></button>
                 </a>
-                {{-- {{route('post#delete',$item['post_id'])}} --}}
-                    <a href="{{route('post#Delete',$item['post_id'])}}">
+                {{-- {{route('post#delete',$item['post_id'])}} --}} 
+                   <a href="">
                       <button class="btn btn-sm bg-danger text-white"><i class="fas fa-trash-alt"></i></button>
                     </a>
                 </td>
               </tr>
             @endforeach
-          
+           
           </tbody>
         </table>
       </div>
-      <!-- /.card-body -->
+     
     </div>
-    <!-- /.card -->
+ 
   </div>
 @endsection

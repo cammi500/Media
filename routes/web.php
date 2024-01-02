@@ -40,11 +40,18 @@ Route::middleware([
     Route::get('admin/list',[ListController::class, 'index'])->name('admin#list');
     Route::get('admin/list/{id}',[ListController::class, 'accountDelete'])->name('admin#listDelete');
     Route::post('admin/list',[ListController::class, 'adminListSearch'])->name('admin#listSearch');
+
     //post
     Route::get('post',[PostController::class, 'index'])->name('admin#post');
     Route::post('post',[PostController::class, 'postCreate'])->name('post#Create');
+    Route::get('post/postDelete/{id}',[PostController::class, 'deletePost'])->name('post#Delete');
+    Route::post('post/search',[PostController::class, 'searchPost'])->name('post#Search');
+    Route::get('post/edit/{id}',[PostController::class,'editPost'])->name('post#Edit');
+    Route::post('post/update/{id}',[PostController::class,'updatePost'])->name('post#Update');
+
     //tr post
     Route::get('trend_post',[TrendPostController::class, 'index'])->name('admin#trendPost');
+
     //category
     Route::get('category',[CategoryController::class, 'index'])->name('admin#category');
     Route::post('category',[CategoryController::class, 'createCategory'])->name('admin#categoryCreate');
