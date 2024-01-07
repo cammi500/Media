@@ -29,5 +29,8 @@ Route::get('category',[AuthController::class,'categoryList'])->middleware('auth:
 
 //post api routes
 Route::get('getAllList',[PostController::class,'allPostList']);
+Route::post('post/search',[PostController::class,'postSearch']);
+
 //category routes api
 Route::get('getAllCategory',[CategoryController::class,'allCategoryList']);
+Route::post('category/search',[CategoryController::class,'categorySearch']);
