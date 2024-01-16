@@ -22,4 +22,12 @@ class PostController extends Controller
             'searchData' => $category
         ]);
     }
+    public function postDetails(Request $request){
+        // dd($request->all());
+        $id =$request->postId;
+        $post =Post::where('post_id',$id)->first();
+        return response()->json([
+            'post' => $post
+        ]);
+    }
 }
