@@ -92,10 +92,10 @@
                       aria-labelledby="nav-home-tab"
                     >
                       <div class="whats-news-caption">
-                        <!-- <span class="" v-if="!tokenStatus">no data</span> -->
-                        <span >
+                        <span  v-if="!tokenStatus">no data</span>
+                        <span v-else>
                           <div class="row">
-                            <div class="" v-if="tokenStatus">
+                            
                               <div
                                 class="mx-auto mt-5 d-flex align-items-center"
                                 v-if="postLists.length == 0"
@@ -126,7 +126,7 @@
                                   </div>
                                 </div>
                               </div>
-                            </div>
+                            
                           </div>
                         </span>
                       </div>

@@ -12,7 +12,7 @@ import { mapGetters } from "vuex";
         };
       },
       computed: {
-        ...mapGetters(['storageToken ','storageUserData']),
+        ...mapGetters(['storageToken','storageUserData']),
       },
       methods: {
         getAllPost() {
@@ -113,7 +113,7 @@ import { mapGetters } from "vuex";
       checkToken(){
         if(this.storageToken != null && 
           this.storageToken != undefined &&
-          this.storageToken != '')
+          this.storageToken != "")
           {
             this.tokenStatus =true;
           }else {

@@ -12,7 +12,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(['storageToken ','storageUserData']),
+    ...mapGetters(['storageToken','storageUserData']),
   },
   methods: {
     login() {
@@ -47,7 +47,7 @@ export default {
     },
       storeUserInfo(response) {
         this.$store.dispatch("setToken", response.data.token);
-            this.$store.dispatch("setUserData", response.data.user);
+         this.$store.dispatch("setUserData", response.data.user);
             // console.log('token successfully set');
       },
     // check() {
@@ -55,4 +55,11 @@ export default {
     //   console.log(this.storageUserData);
     // },
   },
+
+  // mounted () {
+  //   console.log(this.storageToken);
+  //   // this.checkToken();
+  //   this.getAllPost();
+  //   this.getCategory();
+  //   },
 };
