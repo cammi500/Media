@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\CategoryController;
 use App\Http\Controllers\API\PostController;
+use App\Http\Controllers\API\ActiveLogController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -35,3 +36,6 @@ Route::post('post/details',[PostController::class,'postDetails']);
 //category routes api
 Route::get('getAllCategory',[CategoryController::class,'allCategoryList']);
 Route::post('category/search',[CategoryController::class,'categorySearch']);
+
+//active;og
+Route::post('post/actionLog',[ActiveLogController::class,'setActionLog']);
