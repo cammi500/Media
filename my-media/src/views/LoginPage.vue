@@ -2,13 +2,33 @@
     <div>
         <main>
             <div class="d-flex justify-content-center py-3">
-                <p class="btn btn-danger text-white btn-sm mr-4" @click="homePage()" >Home</p>
+                <!-- <p class="btn btn-danger text-white btn-sm mr-4" @click="homePage()" >Home</p>
                 <p class="btn btn-dark text-white btn-sm mr-4" @click="login()" v-if="!tokenStatus">Login</p>
-                <p class="btn btn-dark text-white btn-sm mr-4" @click="logout()" v-if="tokenStatus">Logout</p>
-                
+                <p class="btn btn-dark text-white btn-sm mr-4" @click="logout()" v-if="tokenStatus">Logout</p> -->
+                <p class="btn btn-danger text-white btn-sm mr-4" 
+                @click="homePage()">
+                  Home
+                </p>
+                <p
+                  class="btn btn-dark text-white btn-sm mr-4"
+                  @click="login()"
+                  v-if="!tokenStatus"
+                >
+                  Login
+                </p>
+                <p
+                  class="btn btn-dark text-white btn-sm mr-4"
+                  @click="logout()"
+                  v-if="tokenStatus"
+                >
+                  Logout
+                </p>
               </div>
 
               <div class=" container col-5 shadow-sm p-5 my-5">
+                <div class="alert alert-danger" role="alert" v-if="userStatus">
+                  the Crederial do not match
+                </div>
                 <form>
                     <div class="mb-3">
                       <label for="exampleInputEmail1" class="form-label">Email address</label>

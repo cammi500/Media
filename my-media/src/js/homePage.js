@@ -87,6 +87,7 @@ import { mapGetters } from "vuex";
             name:'login'
         })
     },
+    
       categorySearch(searchKey) {
         let search  = {
           key: searchKey,

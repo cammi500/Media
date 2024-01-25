@@ -14,7 +14,7 @@
         </p>
         <p
           class="btn btn-dark text-white btn-sm mr-4"
-          @click="login()"
+          @click="logout()"
           v-if="tokenStatus"
         >
           Logout
@@ -92,7 +92,9 @@
                       aria-labelledby="nav-home-tab"
                     >
                       <div class="whats-news-caption">
-                        <span  v-if="!tokenStatus">no data</span>
+                        <span  v-if="!tokenStatus"
+                        class="text-white d-flex justify-content-center my-5 bg-danger rounded p-3 h3"
+                        >no data</span>
                         <span v-else>
                           <div class="row">
                             

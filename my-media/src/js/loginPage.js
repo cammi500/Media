@@ -8,7 +8,10 @@ export default {
       userData: {
         email: "",
         password: "",
+        
       },
+      tokenStatus :false,
+      userStatus :false,
     };
   },
   computed: {
@@ -33,12 +36,13 @@ export default {
         .then((response) => {
           // console.log(response.data.token);
           if (response.data.token == null) {
-            console.log("there is no token");
+            this.userStatus=true;
           } else {
             // console.log('login success');
+            this.userStatus=false;
             this.storeUserInfo(response);
-            console.log("token successfully");
-            // this.homePage();
+            // console.log("token successfully");
+            this.homePage();
           }
         })
         .catch((error) => {
