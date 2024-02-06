@@ -30,6 +30,8 @@ class User extends Authenticatable
         'phone',
         'address',
         'gender',
+        'github_id',
+        'auth_type',
     ];
 
     /**

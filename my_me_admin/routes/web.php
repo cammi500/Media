@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\GitHubController;
 use App\Http\Controllers\ListController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
@@ -65,10 +66,12 @@ Route::middleware([
 
 
  
-Route::get('/auth/redirect', function () {
+Route::get('/auth/github', function () {
     return Socialite::driver('github')->redirect();
 });
  
-Route::get('/auth/callback', function () {
+Route::get('/auth/github/callback', function () {
      Socialite::driver('github')->user();
 });
+// Route::get('auth/github', [GitHubController::class, 'gitRedirect']);
+// Route::get('auth/github/callback', [GitHubController::class, 'gitCallback']);
