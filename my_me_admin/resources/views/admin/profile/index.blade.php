@@ -85,7 +85,7 @@
             </form>
             <div class="form-group row">
                 <div class="offset-sm-2 col-sm-10">
-                  <a href="{{route('admin#directChangePassword')}}">Change Password</a>
+                  <a href="{{route('admin#directChangePassword',$id)}}">Change Password</a>
                 </div>
               </div>
           </div>

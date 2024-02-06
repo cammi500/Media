@@ -6,7 +6,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TrendPostController;
 use Illuminate\Support\Facades\Route;
-
+use Laravel\Socialite\Facades\Socialite;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -51,6 +51,8 @@ Route::middleware([
 
     //tr post
     Route::get('trend_post',[TrendPostController::class, 'index'])->name('admin#trendPost');
+    Route::get('trend_post/{id}',[TrendPostController::class, 'detail'])->name('admin#trendPostDetail');
+
 
     //category
     Route::get('category',[CategoryController::class, 'index'])->name('admin#category');
@@ -59,4 +61,14 @@ Route::middleware([
     Route::post('category/search',[CategoryController::class,'searchCategory'])->name('category#search');
     Route::get('category/edit/{id}',[CategoryController::class, 'editCategory'])->name('category#edit');
     Route::post('category/update/{id}',[CategoryController::class, 'updateCategory'])->name('category#update');
+});
+
+
+ 
+Route::get('/auth/redirect', function () {
+    return Socialite::driver('github')->redirect();
+});
+ 
+Route::get('/auth/callback', function () {
+     Socialite::driver('github')->user();
 });

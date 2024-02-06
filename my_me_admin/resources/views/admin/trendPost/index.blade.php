@@ -22,42 +22,43 @@
         <table class="table table-hover text-nowrap text-center">
           <thead>
             <tr>
-              <th>Order ID</th>
-              <th>Customer Name</th>
-              <th>Pizza Name</th>
-              <th>Carrier Name</th>
-              <th>Payment With</th>
-              <th>Order Time</th>
-              <th></th>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Image</th>
+              <th>View Count</th>
+           
             </tr>
           </thead>
           <tbody>
+            @foreach ($data as $item)
             <tr>
-              <td>1</td>
-              <td>Sithu</td>
-              <td>Seafood Pizza</td>
-              <td>Mg Kyaw Kyaw</td>
-              <td>Card</td>
-              <td>2/2/2021</td>
+              <td>{{$item['post_id']}}</td>
+              <td>{{$item['title']}}</td>
+              <td><img class="rounded" width="100px" height="100px" 
+                @if ($item['image'] == null)
+                src="{{asset('defaultImage/Screenshot (176).png')}}"
+                @else
+                src="{{asset('postImage/'.$item['image'])}}"
+                @endif
+                ></td>
+              
+              <td class=""><i class="fa-regular fa-eye mr-2"></i>{{$item['post_count']}}</td>
+              
               <td>
-                <button class="btn btn-sm bg-dark text-white"><i class="fas fa-edit"></i></button>
-                <button class="btn btn-sm bg-danger text-white"><i class="fas fa-trash-alt"></i></button>
+                <button class="btn btn-sm bg-dark text-white">
+                  <a href="{{route('admin#trendPostDetail',$item['post_id'])}}"> <i class="fas fa-edit"></i> </a>
+                </button>
+              
               </td>
             </tr>
-            <tr>
-              <td>2</td>
-              <td>Tun Tun</td>
-              <td>Seafood Pizza</td>
-              <td>Mg Kyaw Kyaw</td>
-              <td>Card</td>
-              <td>2/2/2021</td>
-              <td>
-                <button class="btn btn-sm bg-dark text-white"><i class="fas fa-edit"></i></button>
-                <button class="btn btn-sm bg-danger text-white"><i class="fas fa-trash-alt"></i></button>
-              </td>
-            </tr>
+            @endforeach
+           
           </tbody>
         </table>
+
+        {{-- <div class="d-flex justify-content-center">
+          {{$data->links()}}
+        </div> --}}
       </div>
       <!-- /.card-body -->
     </div>
